@@ -144,3 +144,17 @@ def get_historical_data(
         print("[CRITICAL] Exception caught while preparing response:")
         traceback.print_exc(file=sys.stdout)
         raise HTTPException(status_code=500, detail=f"Response error: {str(e)}")
+
+@router.get("/info/{symbol}")
+def get_symbol_info(symbol: str):
+    try:
+        ticker=yf.Ticker(symbol)
+        info=ticker.info
+        if not info:
+            raise HTTPException(status_code=404, detail="No information found for this symbol.")
+        return info
+    except Exception as e:
+        print((f"[ERROR] Failed to get info for {symbol}: {e}"))
+        raise HTTPException(status_code=500, detail=str(e))
+
+        
