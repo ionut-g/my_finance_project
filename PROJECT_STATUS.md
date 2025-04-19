@@ -1,12 +1,15 @@
 # 📊 My Finance Project – Status
 
 ## 🔗 GitHub Repo
+
 https://github.com/ionut-g/my_finance_project
 
 ## ✅ Obiectiv curent
+
 Testare strategii pe date istorice locale
 
 ## 🧱 Structură
+
 - backend/fastapi/
 - frontend/angular19-material/
 - data/ (date istorice)
@@ -17,6 +20,5 @@ Testare strategii pe date istorice locale
 ## 📅 Progres
 
 ### [2025-04-19]
-- ✅ Implementat model GICS
-- ✅ API pentru adăugare simboluri
-- 🔜 Urmează: download date istorice pentru un simbol
+
+- start
