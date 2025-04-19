@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
-from typing import Optional 
+from typing import Optional, Dict
+from functools import lru_cache
+
 
 GICS_FILE = Path(__file__).parent.parent / "data" / "gics.json"
 
@@ -105,3 +107,12 @@ def get_gics_hierarchy():
         }
         for sec in hierarchy.values()
     ]
+
+
+@lru_cache()
+def get_industry_to_group_map() -> Dict[str, str]:
+    gics_data = load_gics()
+    mapping = {}
+    for item in gics_data:
+        mapping[item["industry_name"]] = item["industry_group_name"]
+    return mapping
