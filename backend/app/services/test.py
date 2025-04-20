@@ -1,14 +1,24 @@
 import yfinance as yf
-import pandas as pd
-from datetime import datetime, timedelta
 
-symbol = "AAPL"
-interval = "1m"
-now = datetime.utcnow()
-start = now - timedelta(days=7)
+sectors_keys = [
+    "basic-materials",
+    "communication-services",
+    "consumer-cyclical",
+    "consumer-defensive",
+    "energy",
+    "financial-services",
+    "healthcare",
+    "industrials",
+    "real-estate",
+    "technology",
+    "utilities"
+]
 
-print(f"Fetching {symbol} from {start} to {now} with interval {interval}")
-df = yf.download(symbol, start=start, end=now, interval=interval, progress=False, threads=False)
+def get_all_sectors():
+    return sectors_keys
 
-print(df.head())
-print(f"Retrieved {len(df)} rows")
+def get_industries_by_sector(sector: str):
+        industries = yf.Sector(sector).industries
+        return {"sector": sector, "industries": industries}
+   
+print(get_industries_by_sector("utilities"))

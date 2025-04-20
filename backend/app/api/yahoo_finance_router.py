@@ -414,9 +414,31 @@ def get_mutualfund_holders(symbol: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@router.get("/sectors")
+def get_all_sectors():
+    sectors_keys = [
+        "basic-materials",
+        "communication-services",
+        "consumer-cyclical",
+        "consumer-defensive",
+        "energy",
+        "financial-services",
+        "healthcare",
+        "industrials",
+        "real-estate",
+        "technology",
+        "utilities"
+        ]
+    return {"sectors": sectors_keys}
 
-# ticker = yf.Ticker("aapl")
-# ticker.history
+@router.get("/sectors/{sector}/industries")
+def get_industries_by_sector(sector: str):
+    try:
+        industries = yf.Sector(sector).industries
+        return {"sector": sector, "industries": industries}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 """
 /yf/history/{symbol} ✅ 
@@ -435,8 +457,6 @@ def get_mutualfund_holders(symbol: str):
 
 /yf/cashflow/{symbol} ✅
 
-/yf/earnings/{symbol} 
-
 /yf/sustainability/{symbol} ✅
 
 /yf/recommendations/{symbol} ✅
@@ -445,7 +465,7 @@ def get_mutualfund_holders(symbol: str):
 
 /yf/options/{symbol} ✅
 
-/yf/isin/{symbol}  ✅
+/yf/isin/{symbol}  ✅ -
 
 /yf/news/{symbol}  ✅
 
