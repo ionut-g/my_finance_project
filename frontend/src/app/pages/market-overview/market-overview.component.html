@@ -1,0 +1,22 @@
+<div class="container">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let country of exchangesByCountry | keyvalue">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ country.key }}</mat-panel-title>
+        <mat-panel-description
+          >{{ country.value.length }} exchanges</mat-panel-description
+        >
+      </mat-expansion-panel-header>
+
+      <div class="exchange-list">
+        <mat-card *ngFor="let exchange of country.value" class="exchange-card">
+          <mat-card-title>{{ exchange.name }}</mat-card-title>
+          <mat-card-content>
+            <p><strong>MIC:</strong> {{ exchange.mic }}</p>
+            <p><strong>City:</strong> {{ exchange.city }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
