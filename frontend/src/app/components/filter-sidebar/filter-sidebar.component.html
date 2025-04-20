@@ -1,0 +1,41 @@
+<form [formGroup]="form" class="sidebar">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Țări</mat-label>
+    <mat-select formControlName="country" multiple>
+      <mat-option *ngFor="let country of countries" [value]="country">
+        {{ country }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-chip-set *ngIf="form.value.country?.length">
+    <mat-chip
+      *ngFor="let c of form.value.country"
+      removable
+      (removed)="removeCountry(c)"
+    >
+      {{ c }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-set>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Burse</mat-label>
+    <mat-select formControlName="exchange" multiple>
+      <mat-option *ngFor="let ex of exchanges" [value]="ex">
+        {{ ex }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-chip-set *ngIf="form.value.exchange?.length">
+    <mat-chip
+      *ngFor="let e of form.value.exchange"
+      removable
+      (removed)="removeExchange(e)"
+    >
+      {{ e }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-set>
+</form>
